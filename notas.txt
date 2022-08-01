@@ -1,0 +1,51 @@
+MySql - senha = admin123 (instalado na porta 3306)	
+
+mysql workbench => Serve para visualizar os dados do MySql
+
+*** Instale o Docker, mas pulei a parte de testes, pois identifiquei que talvez seja necessário algum esforço extra. Preferi deixar para fazer isso mais pra frente.
+
+Spring => franework de injeção de dependência
+Spring Boot => Veio para facilitar, padronizada para o Spring. Elimina a configuração em XML
+			   Existem conveções que fazem parte do código que definem como o projeto será executado.
+			   Essas convensões podem ser customizadas e sobreescritas.
+			   O Spring Boot veio para simplificar o gerenciamento de dependências.
+			   Basta adicionar o Spring Boot como parent do maven.
+			   Ele adiciona um servidor Tomcat na minha aplicação, ao invés de precisar encontrar um containr como JBoss, Jet, Wildfly
+			   O JAR da aplicação possui um Tomcat embarcado.
+			   Endpont default para health metrics e actuators.
+Spring Framwork => Necessitava de um conjunto de arquivos para configuração
+Gradle => Ferramenta para fazer o build, ou seja, similar ao Ant e ao Maven.
+Kotlin / Groovy => Linguagens de programação que também utilizam o Spring boot, podem trabalhar em conjunto com Java. Todas trabalham com JAR.
+Git Bash => It lets you use all git features in command line plus most of standard unix commands.
+IntelliJ => IDE Java similar ao Eclipse, desenvolvido pela Jet Brains, mesma empresa criadora do PyCharm
+Spring initializr => https://start.spring.io/.  É no initializr que eu defino as características do meu projeto como a versão do spring boot por exemplo. 
+												Na verdade ele eu nem precisei utilizar este recurso, pois estou usando o STS.
+												Mas poderia fazer desta forma e depois mandar gerar o projeto para depois importar no Eclipse.
+No STS, depois de definidos os parâmetros do projeto, precisamos definir os projetos que teremos dependências. 
+No caso desse curso, selecionei: Spring Boot devTools e Spring Web
+*** Erro ao criar o primeiro projeto: Descobri que o Eclipse (STS) não vem com a ver da library correta. Assim, precisei configurar a minha IDE para utilizar o Java 18.
+Fiz isso da seguinte forma: Em Window > Preferences > Installed JREs, cliquei no botão Add, depois Standard VM. Apontei para o diretório da minha JRE. 
+Também fui em Em Window > Preferences > Installed JREs > Execution Environments e marquei a versão desejada. 
+No projeto > properties > Java Build Path > Na aba Library, Modulepath => Excluí a Library que estava com problema e add Library correta.
+ => Alterando src>main>resources>application.properties para application.yml
+Motivo: Kubernetes, Docker compose, github actions, trevci utilizam yml
+Kubernetes => Sistema de orquestração de contêineres open-source que automatiza a implantação, o dimensionamento e a gestão de aplicações em contêineres.
+Docker Compose => Orquestrador de containers da Docker
+Maven Archetype => Trata-se de um template para criar uma variedade de estruturas de projetos Java.
+Possíveis conflitos no Java => Existir mais de um artefado (no pom.xml artifactId) que irá importar classes / métodos de mesmo nome. 
+                               Isso irá ocorrer quando o Maven for carregar suas dependências. Para evitar esse problema, utilizar a tag <exclusions> no pom.xml.
+							   Ver exemplo em: https://youtu.be/eSAS5msDD7w
+Diferença entre uma aplicação Web e uma API Rest => A aplicação Web, utiliza a anotation @Controller, enquanto a API Rest, utiliza @RestController.
+											        No caso da aplicação Web, é retornado um HTML, CSS, JS, etc. Enquando API Rest retorna XML, JSON, etc.
+No Rest podemos ter: "Query params" e "Path params"
+	"Query params" ou "Query String" => Parâmetros são opcionais, utilizado no método "@RequestParam"
+	"Path params" => Parâmetros são obrigatórios, utiliza no método "@PathVariable"
+	URL passando parâmetro: http://localhost:8080/greeting?name=Image4ever  ou http://localhost:8080/greeting?name=Image4ever&name2=XXXX (2 parâmetros) 
+Lombok - Faz o Getter e Setter de forma automática, porém o Leandro do curso não recomenda. No artigo abaixo, eles não recomendam o uso em projetos JPA.
+		https://reflectoring.io/when-to-use-lombok/
+
+
+*********************************************************************************************************************************
+Estudar final e static
+Git Worktree - descobrir como funciona
+*********************************************************************************************************************************
