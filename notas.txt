@@ -43,6 +43,8 @@ No Rest podemos ter: "Query params" e "Path params"
 	URL passando parâmetro: http://localhost:8080/greeting?name=Image4ever  ou http://localhost:8080/greeting?name=Image4ever&name2=XXXX (2 parâmetros) 
 Lombok - Faz o Getter e Setter de forma automática, porém o Leandro do curso não recomenda. No artigo abaixo, eles não recomendam o uso em projetos JPA.
 		https://reflectoring.io/when-to-use-lombok/
+@Autowired e @Service - são annotations utilizado para fazer a injeção de dependência de um objeto service na Controller. Para saber mais, acessar o projeto e ver o código.
+Mock - É um objeto fictício que imita o comportamento de um objeto real.
 
 
 *********************************************************************************************************************************

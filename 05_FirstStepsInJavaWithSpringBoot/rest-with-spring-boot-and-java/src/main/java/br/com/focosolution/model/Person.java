@@ -8,45 +8,14 @@ public class Person implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private long id;
-	private long firstName; 
-	private long lastName;
-	private long address;
-	private long gender;
+	private String firstName; 
+	private String lastName;
+	private String address;
+	private String gender;
 	
 	// JPA exige tal construtor	
-	public Person() {}
+	public Person() {}	
 	
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
-	public long getFirstName() {
-		return firstName;
-	}
-	public void setFirstName(long firstName) {
-		this.firstName = firstName;
-	}
-	public long getLastName() {
-		return lastName;
-	}
-	public void setLastName(long lastName) {
-		this.lastName = lastName;
-	}
-	public long getAddress() {
-		return address;
-	}
-	public void setAddress(long address) {
-		this.address = address;
-	}
-	public long getGender() {
-		return gender;
-	}
-	public void setGender(long gender) {
-		this.gender = gender;
-	}
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(address, firstName, gender, id, lastName);
@@ -61,10 +30,50 @@ public class Person implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Person other = (Person) obj;
-		return address == other.address && firstName == other.firstName && gender == other.gender && id == other.id
-				&& lastName == other.lastName;
+		return Objects.equals(address, other.address) && Objects.equals(firstName, other.firstName)
+				&& Objects.equals(gender, other.gender) && id == other.id && Objects.equals(lastName, other.lastName);
 	}
-	
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
 	
 	
 }
