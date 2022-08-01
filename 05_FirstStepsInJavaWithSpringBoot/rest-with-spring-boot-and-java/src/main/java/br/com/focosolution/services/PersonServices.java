@@ -18,30 +18,6 @@ public class PersonServices {
 	private final AtomicLong counter = new AtomicLong();
 	private Logger logger = Logger.getLogger(PersonServices.class.getName());
 
-	public List<Person> findAll() {
-		
-		logger.info("Estou no findAll");
-		
-		List<Person> persons = new ArrayList<>();
-		for (int i = 0; i < 8; i++) {
-			Person person = mockPerson(i); 
-			persons.add(person);
-		}
-		return persons;
-	}
-	
-	
-	private Person mockPerson(int i) {
-		Person person = new Person();
-		person.setId(counter.incrementAndGet());
-		person.setFirstName("FirstName "+i);
-		person.setLastName("LastName "+i);
-		person.setAddress("Address "+i);
-		person.setGender("Male");
-		return person;
-	}
-
-
 	public Person findById(String id) {
 		
 		logger.info("Procurando uma pessoa, id = "+id);
@@ -54,5 +30,44 @@ public class PersonServices {
 		person.setGender("Male");
 		return person;
 	}
+	
+	public Person create(Person person) {
+		logger.info("Estou no create!");
+		person.setId(counter.incrementAndGet());
+		return person;
+	}
+
+	public Person update(Person person) {
+		logger.info("Estou no update!");
+		return person;
+	}
+	
+
+	public void delete(long id) {
+		logger.info("Estou no delete!");
+ 	}	
+	
+	public List<Person> findAll() {
+		
+		logger.info("Estou no findAll");
+		
+		List<Person> persons = new ArrayList<>();
+		for (int i = 0; i < 8; i++) {
+			Person person = mockPerson(i); 
+			persons.add(person);
+		}
+		return persons;
+	}
+	
+	private Person mockPerson(int i) {
+		Person person = new Person();
+		person.setId(counter.incrementAndGet());
+		person.setFirstName("FirstName "+i);
+		person.setLastName("LastName "+i);
+		person.setAddress("Address "+i);
+		person.setGender("Male");
+		return person;
+	}
+	
 
 }

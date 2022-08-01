@@ -45,9 +45,34 @@ Lombok - Faz o Getter e Setter de forma automática, porém o Leandro do curso n
 		https://reflectoring.io/when-to-use-lombok/
 @Autowired e @Service - são annotations utilizado para fazer a injeção de dependência de um objeto service na Controller. Para saber mais, acessar o projeto e ver o código.
 Mock - É um objeto fictício que imita o comportamento de um objeto real.
+JPA - Responsável por fazer a persistência e o mapeamento objeto relacional desde a especificação EJB 3.0.
+jpa: hibernate: ddl-auto: => Na configuração do application.yml, utilizamos inicialmente update. Para conhecer mais, acessar https://stackoverflow.com/questions/438146/what-are-the-possible-values-of-the-hibernate-hbm2ddl-auto-configuration-and-wha
+
 
 
 *********************************************************************************************************************************
 Estudar final e static
 Git Worktree - descobrir como funciona
 *********************************************************************************************************************************
+
+
+senha para e-mail da FocoSolution (paulo.freire)
+i4ever_guipla => não
+&quilibrio209 => não 
+
+spring:
+  datasource:
+    dbcp2:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/rest_with_spring_boot?useTimezone=true&serverTimezone=UTC
+      user: root
+      password: admin123
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+      show-sql: true
+
+
