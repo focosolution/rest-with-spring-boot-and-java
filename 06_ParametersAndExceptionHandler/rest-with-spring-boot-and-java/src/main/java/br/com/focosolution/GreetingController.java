@@ -12,8 +12,7 @@ public class GreetingController {
 	private static final String template = "Hello, my %s!";
 	private final AtomicLong counter = new AtomicLong();
 	
-	// Utilizando Query Params, exemplo de URI: http://localhost:8080/greeting?name=FocoSolution
-	@RequestMapping("/greeting")  
+	@RequestMapping("/greeting")
 	public Greeting greeting(
 			@RequestParam(value = "name", defaultValue = "World") String param) {
 		return new Greeting(counter.incrementAndGet(), String.format(template, param));
