@@ -25,7 +25,7 @@ public class PersonController {
 	@RequestMapping(value = "/{id}", 	
 			method=RequestMethod.GET,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public Person findById(@PathVariable(value = "id") String paramId) {
+	public Person findById(@PathVariable(value = "id") Long paramId) {
 		return service.findById(paramId);
 	}
 
@@ -58,7 +58,7 @@ public class PersonController {
 	// Executando pelo Postman percebemos que foi Okay pois ele retornou o código 200 OK
 	@RequestMapping(value = "/{id}", 	
 			method=RequestMethod.DELETE)
-	public void delete(@PathVariable(value = "id") long paramId) {
+	public void delete(@PathVariable(value = "id") Long paramId) {
 		service.delete(paramId);
 	}	
 
