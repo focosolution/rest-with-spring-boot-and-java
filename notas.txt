@@ -47,12 +47,28 @@ Lombok - Faz o Getter e Setter de forma automática, porém o Leandro do curso n
 Mock - É um objeto fictício que imita o comportamento de um objeto real.
 JPA - Responsável por fazer a persistência e o mapeamento objeto relacional desde a especificação EJB 3.0.
 jpa: hibernate: ddl-auto: => Na configuração do application.yml, utilizamos inicialmente update. Para conhecer mais, acessar https://stackoverflow.com/questions/438146/what-are-the-possible-values-of-the-hibernate-hbm2ddl-auto-configuration-and-wha
-
-
+Na criação do banco de dados no HeidiSQL, utilizei a Colação latin1_swedish_ci (antes, quando criei com o MySQL Workbench, deixei o default e tomei erro)
+Value Object - É o padrão de projeto utilizado para evitar que nosso objeto model, seja exposto para o client. Criamos assim um novo objeto que irá armazenar os nossos dados.
+Dozer - É um model mapper, ou seja, utilizado para fazer o mapeamento entre objetos do tipo model. Similar a MapStructure, Orika, ModelMapper, Selma, ... 
+		Para mais informações ver: https://dozermapper.github.io/gitbook/documentation/gettingstarted.html
+VAR - foi adicionado ao Java na versão 10. Com ele não é preciso informar o tipo da variável, já que o compilador iré definir de forma automática.		
+@JsonPropertyOrder - Annotation que tem como objetivo definir a ordem dos atributo / campo
+@JsonProperty - Annotation que tem como objetivo alterar o nome do campo / aributo
+@JsonIgnore - Omito o campo ao gerar o meu JSon
+Migrations com Flyway - Trata-se de um padrão para controlar o caso de diferentes versões do banco de dados. Ou seja, o código é modificado e com isso será necessária uma nova
+						alteração no banco de dados e uma possível migração dos dados.
+Content Negotiation - Negociação de como os dados serão disponibilizados: XML, YML (Yaml), JSON, CSV, PDF, etc
+Server-driven - defini como irá prover a API 
+Agent-driven - informa como deseja consumir a API						
+HATEOAS - Pré requisito para que a aplicações seja RESTful. Resumindo, o HATEOAS fornece links de outras funcionalidades no retorno do JSON / XML para o cliente
+Swagger (Open API) - Framework open source multiplatafora, auxia a desenvolver serviços RESTful. Open API está se tornando um padrão no mercado atual.
+				   - A implementação do Open API no Spring pode ser vista em: springdoc-openapi v1.6.9 => https://springdoc.org/
+				   
 
 *********************************************************************************************************************************
 Estudar final e static
 Git Worktree - descobrir como funciona
+Estudar testes unitários, ver "DozerConverterTest.java" em br.com.focosolution.unittests.mapper
 *********************************************************************************************************************************
 
 
@@ -60,19 +76,6 @@ senha para e-mail da FocoSolution (paulo.freire)
 i4ever_guipla => não
 &quilibrio209 => não 
 
-spring:
-  datasource:
-    dbcp2:
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://localhost:3306/rest_with_spring_boot?useTimezone=true&serverTimezone=UTC
-      user: root
-      password: admin123
-  jpa:
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL8Dialect
-      show-sql: true
+
 
 
