@@ -1,13 +1,16 @@
 package br.com.focosolution.services;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.focosolution.data.vo.v1.PersonVO;
+import br.com.focosolution.data.vo.v2.PersonVOV2;
 import br.com.focosolution.exceptions.ResourceNotFoundException;
+import br.com.focosolution.mapper.DozerMapper;
+import br.com.focosolution.mapper.custom.PersonMapper;
 import br.com.focosolution.model.Person;
 import br.com.focosolution.repositories.PersonRepository;
 
@@ -17,37 +20,47 @@ import br.com.focosolution.repositories.PersonRepository;
 @Service
 public class PersonServices {
 	
-	private final AtomicLong counter = new AtomicLong();
 	private Logger logger = Logger.getLogger(PersonServices.class.getName());
 	
 	@Autowired
 	PersonRepository repository;
+	
+	@Autowired
+	PersonMapper mapper;	
 
-	public Person findById(Long id) {
+	public PersonVO findById(Long id) {
 		
 		logger.info("Procurando uma pessoa, id = "+id);
+
+		// Adicionando um lâmbida funcion para tratar exceção
+		var entity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Registro não encontrado!"));
 		
-		Person person = new Person();
-		person.setId(counter.incrementAndGet());
-		person.setFirstName("Paulo");
-		person.setLastName("Freire");
-		person.setAddress("Interlagos - São Paulo - SP");
-		person.setGender("Male");
-//		return person;
-		// Adicionando um lâmbida funcion para tratar excessão
-		return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Registro não encontrado!"));
+		return DozerMapper.parseObject(entity, PersonVO.class);
+		
 	}
 	
-	public Person create(Person person) {
+	public PersonVO create(PersonVO person) {
 		logger.info("Estou no create!");
-		person.setId(counter.incrementAndGet());
-//		return person;
-		return repository.save(person);
-	}
 
-	public Person update(Person person) {
+		var entity = DozerMapper.parseObject(person, Person.class);
+		
+		var vo = DozerMapper.parseObject(repository.save(entity), PersonVO.class);
+		
+		return vo;
+	}
+	
+	public PersonVOV2 createv2(PersonVOV2 person) {
+		logger.info("Estou no create V2!");
+
+		var entity = mapper.convertVOToEntity(person);
+		
+		var vo = mapper.convertEntityToVO(repository.save(entity));
+		
+		return vo;
+	}	
+
+	public PersonVO update(PersonVO person) {
 		logger.info("Estou no update!");
-//		return person;
 		
 		var entity = repository.findById(person.getId()).orElseThrow(() -> new ResourceNotFoundException("Registro não encontrado!"));
 		
@@ -56,7 +69,9 @@ public class PersonServices {
 		entity.setAddress(person.getAddress());
 		entity.setGender(person.getGender());
 		
-		return repository.save(person);
+		var vo = DozerMapper.parseObject(repository.save(entity), PersonVO.class);
+		return vo;
+
 	}
 	
 	public void delete(Long id) {
@@ -68,17 +83,11 @@ public class PersonServices {
 		
  	}	
 	
-	public List<Person> findAll() {
+	public List<PersonVO> findAll() {
 		
 		logger.info("Estou no findAll");
 		
-//		List<Person> persons = new ArrayList<>();
-//		for (int i = 0; i < 8; i++) {
-//			Person person = mockPerson(i); 
-//			persons.add(person);
-//		}
-//		return persons;
-		return repository.findAll();
+		return DozerMapper.parseListObjects(repository.findAll(), PersonVO.class);
 	}
 	
 
