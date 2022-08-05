@@ -57,18 +57,55 @@ VAR - foi adicionado ao Java na versão 10. Com ele não é preciso informar o t
 @JsonIgnore - Omito o campo ao gerar o meu JSon
 Migrations com Flyway - Trata-se de um padrão para controlar o caso de diferentes versões do banco de dados. Ou seja, o código é modificado e com isso será necessária uma nova
 						alteração no banco de dados e uma possível migração dos dados.
+						Quando o servidor é levantado, o Flyway processa cada um dos arquivos .sql que estão no src/main/resources/db/migration
 Content Negotiation - Negociação de como os dados serão disponibilizados: XML, YML (Yaml), JSON, CSV, PDF, etc
 Server-driven - defini como irá prover a API 
 Agent-driven - informa como deseja consumir a API						
-HATEOAS - Pré requisito para que a aplicações seja RESTful. Resumindo, o HATEOAS fornece links de outras funcionalidades no retorno do JSON / XML para o cliente
-Swagger (Open API) - Framework open source multiplatafora, auxia a desenvolver serviços RESTful. Open API está se tornando um padrão no mercado atual.
+HATEOAS - Pré requisito para que a aplicações seja RESTful. Resumindo, o HATEOAS fornece links de outras funcionalidades no retorno do JSON / XML para o cliente.
+          Um exemplo prático seria o web service retornar um link para emissão de uma NF quando assim for possível. 
+Swagger (Open API) - Framework open source multiplatafora, auxilia na criação de serviços RESTful. Open API está se tornando um padrão no mercado atual.
+				   - Este framework é fundamental na documentação do serviço.
 				   - A implementação do Open API no Spring pode ser vista em: springdoc-openapi v1.6.9 => https://springdoc.org/
-				   
+http://localhost:8080/swagger-ui/index.html => Através dessa URL eu consigo ver todos os serviços que estão disponíveis na minha máquina.		
+https://lankydan.dev/documenting-a-spring-rest-api-following-the-openapi-specification - Muito interessante essa URL que explica detalhes da documentação 
+					de um Spring REST API seguindo a especificação OpenAPI.
+Integração Swagger com Postman - É possível importar o JSON do Swagger ou a URL para o Postman e assim conhecer muito bem o funcionamento da API.	
+JWT - Json Web Token - a especificação diz que é uma forma compacta e segura de representar as claims (reinvidicações) entre as partes
+JWS - Json Web Signature				
+JWE - Json Web Encryption
+JWK - Json Web Keys
+JWA - Json Web Algorithms
+Hibernate:ddl-auto => No arquivo application.yml, devo setar esse parâmetro com uma das opções abaixo:
+					  update / none -> Quando quero que o Hibernate automaticamente crie / altere as tabelas. Quando utilizamos o FlyWay, deixamos como "none"
+https://env.simplestep.ca/ => Converte Spring Boot Properties em Spring Boot YAML
+JWT e Spring security (seção 17) - principais informações:
+. Baixados os migrations para que as tabelas fossem criadas e populadas, são elas: users, permission e users e user_permission
+. Adicionado o Spring Security à aplicação: no pom.xml, adicionada a dependência "spring-boot-starter-security"
+. Mapeadas as classes Permission e Users, assim como a relação entre user e permission. 
+  Elas foram criadas baseadas nas tabelas: users, permission e user_permission
+. Criado o repositório para User (UserRepository). Lembrando que os repositórios extendem JpaRepository e é fundamental para trabalhar com persistência.  
+. Criado serviço para User (UserService).
+. Criada a exceção "InvalidJwtAuthenticationException" e atualizado o CustomizedResponseEntityExceptionHandler com essa exceção.
+. Criados os VOs: AccountCredentialsVO e TokenVO
+. Criadas várias classes de configuração no pacote "br.com.focosolution.security.jwt"
+. Criando br.com.focosolution.config.SecurityConfig.java (139 -  WebSecurityConfigurerAdapter is deprecated)
+. Criação do AuthServices
+. Criação do AuthController
+Importando o Swagger para o Postman:
+	> Pegar a URL do Swagger (http://localhost:8080/v3/api-docs), ir no Postman e clicar em Import > Link e colar a URL
+	
+
+
+Repósitory
+Repositóry
+					  
+					
 
 *********************************************************************************************************************************
 Estudar final e static
 Git Worktree - descobrir como funciona
 Estudar testes unitários, ver "DozerConverterTest.java" em br.com.focosolution.unittests.mapper
+Padrão de projeto Solid => https://youtu.be/6SfrO3D4dHM
 *********************************************************************************************************************************
 
 
@@ -77,5 +114,13 @@ i4ever_guipla => não
 &quilibrio209 => não 
 
 
+<dependency>
+	<groupId>org.hibernate.validator</groupId>
+	<artifactId>hibernate-validator</artifactId>
+</dependency>	
 
+jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+
+
+paulorgfreire
 

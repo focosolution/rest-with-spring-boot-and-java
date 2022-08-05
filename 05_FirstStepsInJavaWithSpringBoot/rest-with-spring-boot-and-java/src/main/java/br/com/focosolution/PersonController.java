@@ -17,9 +17,16 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.focosolution.data.vo.v1.PersonVO;
 import br.com.focosolution.data.vo.v2.PersonVOV2;
 import br.com.focosolution.services.PersonServices;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
-@RequestMapping("/person")
+@RequestMapping("/api/person/v1")
+@Tag(name = "Person", description = "Endpoints para gerenciar person")
 public class PersonController {
 	
 	// A annotation abaixo faz a injeção do serviço, sem precisar instanciá-lo.
@@ -29,12 +36,41 @@ public class PersonController {
 	// Utilizando Path Params, exemplo: http://localhost:8080/person/1
 	@GetMapping(value = "/{id}", 	
 			produces = MediaType.APPLICATION_JSON_VALUE)
+	@Operation(summary = "Finds a Person", description = "Descrição Finds a Person",
+			tags = {"Person"},
+			responses = {
+					@ApiResponse(description = "Success", responseCode = "200", 
+							content = @Content(schema = @Schema(implementation = PersonVO.class))
+					),
+					@ApiResponse(description = "No Content", responseCode = "204", content = @Content),
+					@ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+					@ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+					@ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+					@ApiResponse(description = "Internal Error", responseCode = "500", content = @Content),
+			}
+	)	
 	public PersonVO findById(@PathVariable(value = "id") Long paramId) {
 		return service.findById(paramId);
 	}	
 	
 	// Utilizando Path Params, exemplo: http://localhost:8080/person
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	@Operation(summary = "Finds all Person", description = "Descrição de Finds all Person",
+			tags = {"Person"},
+			responses = {
+					@ApiResponse(description = "Success", responseCode = "200", 
+							content = {
+								@Content(
+										mediaType = "application/json",
+										array = @ArraySchema(schema = @Schema(implementation = PersonVO.class))
+								)
+							}),
+					@ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+					@ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+					@ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+					@ApiResponse(description = "Internal Error", responseCode = "500", content = @Content),
+			}
+	)
 	public List<PersonVO> findAll() {
 		return service.findAll();
 	}		
