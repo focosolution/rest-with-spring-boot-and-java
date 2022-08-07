@@ -79,9 +79,10 @@ Hibernate:ddl-auto => No arquivo application.yml, devo setar esse parâmetro com
 					  update / none -> Quando quero que o Hibernate automaticamente crie / altere as tabelas. Quando utilizamos o FlyWay, deixamos como "none"
 https://env.simplestep.ca/ => Converte Spring Boot Properties em Spring Boot YAML
 JWT e Spring security (seção 17) - principais informações:
-. Baixados os migrations para que as tabelas fossem criadas e populadas, são elas: users, permission e users e user_permission
-. Adicionado o Spring Security à aplicação: no pom.xml, adicionada a dependência "spring-boot-starter-security"
-. Mapeadas as classes Permission e Users, assim como a relação entre user e permission. 
+. Baixados os migrations para que as tabelas fossem criadas e populadas, são elas: users, permission e user_permission
+. Adicionado o Spring Security à aplicação: no pom.xml, adicionada a dependência "spring-boot-starter-security". Mais pra frente também foo adicionado o
+  artefato java-jwt, pertencente ao grupo "com.auth0" 
+. Mapeadas as classes Permission e Users (model), assim como a relação entre user e permission. 
   Elas foram criadas baseadas nas tabelas: users, permission e user_permission
 . Criado o repositório para User (UserRepository). Lembrando que os repositórios extendem JpaRepository e é fundamental para trabalhar com persistência.  
 . Criado serviço para User (UserService).
@@ -94,6 +95,7 @@ JWT e Spring security (seção 17) - principais informações:
 Importando o Swagger para o Postman:
 	> Pegar a URL do Swagger (http://localhost:8080/v3/api-docs), ir no Postman e clicar em Import > Link e colar a URL
 	
+16:40 ~ 16:53
 
 
 Repósitory
@@ -123,4 +125,25 @@ jakarta.validation.NoProviderFoundException: Unable to create a Configuration, b
 
 
 paulorgfreire
+
+youtube.com/channel/UCjiQsZ0v80jO3l98gELPDPQ
+
+
+
+Tela 60 HZ
+NFC - 
+Vale a pena por R$ 1.200,00
+
+A13 - Não possui NFC, custa R$ 1.200,00
+
+
+5 Melhores:
+A22 - 90H, Bateria 5.000 mA
+M22 - Similar ao A22 - 1.349,00
+A32 - R$ 1.400,00
+M32 - 6GB RAM - 1570,00 a 1649,00
+
+
+Nano SIM - VIVO 4G - RJ
+Nano SIM - Boneco Vivo - SP
 
