@@ -1,6 +1,7 @@
 package br.com.focosolution;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.focosolution.data.vo.v1.PersonVO;
 import br.com.focosolution.data.vo.v2.PersonVOV2;
+import br.com.focosolution.services.AuthServices;
 import br.com.focosolution.services.PersonServices;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -29,11 +31,14 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @Tag(name = "Person", description = "Endpoints para gerenciar person")
 public class PersonController {
 	
+	private Logger logger = Logger.getLogger(PersonController.class.getName());
+	
 	// A annotation abaixo faz a injeção do serviço, sem precisar instanciá-lo.
 	@Autowired
 	private PersonServices service;
 	
 	// Utilizando Path Params, exemplo: http://localhost:8080/person/1
+	// Os @ApiResponse criados abaixo são para o Swagger utilizar, ou seja, documentação do OpenAPI.	
 	@GetMapping(value = "/{id}", 	
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	@Operation(summary = "Finds a Person", description = "Descrição Finds a Person",
@@ -72,6 +77,7 @@ public class PersonController {
 			}
 	)
 	public List<PersonVO> findAll() {
+		logger.info("Estou no findAll");
 		return service.findAll();
 	}		
 

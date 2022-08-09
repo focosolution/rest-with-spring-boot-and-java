@@ -94,6 +94,14 @@ JWT e Spring security (seção 17) - principais informações:
 . Criação do AuthController
 Importando o Swagger para o Postman:
 	> Pegar a URL do Swagger (http://localhost:8080/v3/api-docs), ir no Postman e clicar em Import > Link e colar a URL
+JWT na prática:
+. Chamo o serviço auth (Post), com login e senha. Recebo como retorno accessToken e refreshToken
+. No Headers, KEY=Authorization passo o token precedido da string "Bearer" (portador)
+No Postaman:
+	> Posso criar um ambiente (environment) e nele salvar variáveis como "username" e "password"
+	> No Body, posso passar as variáveis acima. Ver no "Post" do Authenticates
+	> Também posso criar variáveis dinamicamente. Ver no "Tests" do Authenticates, utilizando javascript.
+	> Posso utilizar as variáveies, tanto na URL ({{baseUrl}}/auth/refresh/{{username}}), quanto no Headers Authorization (Bearer {{refreshToken}})
 	
 16:40 ~ 16:53
 

@@ -1,10 +1,13 @@
 package br.com.focosolution.services;
 
+import java.util.logging.Logger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +18,8 @@ import br.com.focosolution.security.jwt.JwtTokenProvider;
 
 @Service
 public class AuthServices {
+	
+	private Logger logger = Logger.getLogger(AuthServices.class.getName());
 
 	@Autowired
 	private AuthenticationManager authenticationManager;
@@ -30,8 +35,16 @@ public class AuthServices {
 		try {
 			var username = data.getUsername();
 			var password = data.getPassword();
+			logger.info("username = "+username+" password = "+password);
+			
+			/*  Ao chamar o "authenticate" abaixo, o spring security executa os seguintes passos: 
+			 *  1. Chama o loadUserByUsername do UserServices
+			 *  2. Faz a validação do usuário e senha e caso não tenha sucesso, gera um AuthenticationException
+			 */
 			authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(username, password));
+			
+			logger.info("Após a chamada do authenticationManager.authenticate");
 			
 			var user = repository.findByUserName(username);
 			
@@ -42,7 +55,8 @@ public class AuthServices {
 				throw new UsernameNotFoundException("Username " + username + " not found!");
 			}
 			return ResponseEntity.ok(tokenResponse);
-		} catch (Exception e) {
+		} catch (AuthenticationException e) {
+			logger.info("Entrou no AuthenticationException");
 			throw new BadCredentialsException("Invalid username/password supplied!");
 		}
 	}
