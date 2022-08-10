@@ -102,6 +102,46 @@ No Postaman:
 	> No Body, posso passar as variáveis acima. Ver no "Post" do Authenticates
 	> Também posso criar variáveis dinamicamente. Ver no "Tests" do Authenticates, utilizando javascript.
 	> Posso utilizar as variáveies, tanto na URL ({{baseUrl}}/auth/refresh/{{username}}), quanto no Headers Authorization (Bearer {{refreshToken}})
+Docker	- Ambiente que permite a criação de n containers. Esses containers podem ser exportados para outro ambiente que contenha o Docker.
+Docker Image x docker container - Fazendo uma analogia para simplificar: "Docker image is a class and docker container is an object"
+Docker Compose - ferramenta separada do Docker que é utilizada na configuração. Com ela, evitamos a configuração através de linha de comando.
+			   - É uma abstração do Docker Client. É usado para inicializar múlti-plos contaniners.
+			   - Possui um arquivo chamado docker-compose.yml
+Kubernets - Ferramenta que vem junto com o Docker quando utilizamos o Windows.
+WSL - Windows Subsystem for Linux (o Docker exigiu a sua instalação (WSL2) logo aós a instalação. Segui o link abaixo:
+		https://docs.microsoft.com/pt-br/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package
+Como criar o .JAR do projeto: [mvn clean package -DskipTests] - Comando exectado dentro do STS, no projeto (botão direito) > Show In > Terminal. 
+Dockerizando nossa aplicação (passo a passo):
+1. Instalação do Docker
+2. Criado o Dockerfile
+3. Configurada a aplicação para subir na porta 80 (ver no application.yml)
+4. Criado o .JAR no STS, conforme acima: [mvn clean package -DskipTests]
+5. Criado / configurado o docker-compose.yml
+6. Executar o build no diretório do docker-compose.yml com o comando abaixo:
+   => docker compose up -d --build
+7. Após finalizado o processo, verificar as stacks que estão em execução: 
+   => docker compose ls   saída =>   (rest-with-spring-boot-and-java   running(2)          C:\DEV\Estudo\API-Rest-Leandro-Costa\res... ): uma stack com 2 containers
+   Verificar os containers:
+   => docker ps     saída =>  (e71c3fb345a8   focosolution/rest-with-spring-boot   <== container 1 
+                               411e18642f7a   mysql:8.0.29                         <== container 2)
+   Verificar os logs do container:
+   => docker logs <container ID>
+   Verificar as docker images que estão sendo executadas:
+   => docker images
+   Excluir uma docker image:
+   => docker rmi <your-image-id>
+Docker hub => Similar ao GitHub, porém serve para hospedar imagens ao invés de códigos!
+Como enviar uma docker image para o dockerHub:
+. docker login  (é preciso estar logado via https://hub.docker.com/
+. docker push <nome-da-imagem>
+Definindo variáveis no Github => Settings > Secrets > Actions > New repository secret
+Github Actions => Ir no repositório > Actions > Java with Maven > Configure
+   
+   
+
+
+
+build: ./rest-with-spring-boot-and-java  => ./
 	
 16:40 ~ 16:53
 
@@ -154,4 +194,16 @@ M32 - 6GB RAM - 1570,00 a 1649,00
 
 Nano SIM - VIVO 4G - RJ
 Nano SIM - Boneco Vivo - SP
+
+java jwt - 182
+java docker - 3.375
+java microsserviços - 894
+java microservices - 2.510
+java microsservices
+
+
+WSL 2 installation is incomplete.
+Instalar o Kernel update
+
+
 
